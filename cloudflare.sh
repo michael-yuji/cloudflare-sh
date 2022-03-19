@@ -541,7 +541,7 @@ Usage: dns [CMD] [options...]'
           --ttl      [NUM]        - time to live, see cloudflare api for valid values (default 1 (auto))
 
     delete RECORD_ID 
-      - Delete a record by RECORD_ID 
+      - Delete a record by RECORD_ID
 
 EOF
 }

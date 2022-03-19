@@ -87,7 +87,7 @@ To register your api key
 cloudflare.sh apikey new --keyname foo --apikey <cloudflare-api-key>
 ```
 
-If this is your first time and first api key, the tool automatiaclly set it as the default key so you never have to type in the api again.
+If this is your first api key, the tool automatiaclly set it as the default key so you never have to type in the api again.
 
 To create a profile,
 
