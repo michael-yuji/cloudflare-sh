@@ -13,13 +13,71 @@ After you have installed the dependencies, simply clone the directory or place t
 
 # Usage
 
-### Api key / Profile management
+```
+Usage: cloudflare.sh [options] [CMD] [CMD ARGS...]
 
+  available commands:
+    apikey  - Manage api keys
+    zone    - Manage zones
+    dns     - Manage DNS
+    profile - Manage profiles
+```
+
+### Api key / Profile management
 You can use this script with and without storing your api keys with this tool, however storing it will make your life much easier and secure. In fact, you can store multiple api keys, and alias them to fit your need. The api keys are always store with `0400` permission so only the owner can read it.
 
 To run any of the command with an explicit api key, you can simply add the `--apikey <cloudflare-key>` option.
 
+```
+Usage: apikey [CMD] [options...]
+
+  available commands:
+
+    list
+      list all profiles
+
+    new•¶
+      Reqister and set a name for an api key
+        Required options:
+          --apikey [KEY]  - the api key to store
+          --name   [NAME] - the name of the api key to store as
+
+    set-default [NAME]
+      Set the api key with name [NAME] as the default api key, such that when
+        executing any other commands without either --apikey or --keyname, the
+        default api key will be used
+
+    remove [NAME]
+      Remove the api key stored as [NAME]
+```
+
 Your DNS records lives in a zone, and a zone lives in your account, natuarlly it becomes quite cumbersome when you just want to query / perform changes to some domain. This tool allows you to create different profiles, a profile stores a api key together with a zone, such that you can manage your domain without needing to explicitly specify the api key and zone id you will use.
+
+
+```
+ Usage: profile [CMD] [options...]
+ 
+   available commands:
+ 
+   list
+      list all profiles
+ 
+   create [NAME]
+     Reqister and set a name for a profile
+       Optional options:
+         --keyname [NAME]    - the api key name for this profile
+         --zone_name [NAME] - the name of the zone to be set for this profile
+         --zone_id   [ID]   - the zone id to be set for this profile
+ 
+   update-zone [NAME]
+     Update the zone of a profile with [NAME]
+
+   update-key [NAME]
+     Update the apikey use by the profile with [NAME]
+
+   remove [NAME]
+     Remove the api key stored as [NAME]
+ ```
 
 This script by default stores your configuration under `$HOME/.cloudflare`, this directory will be created automatically when you use the script.
 
