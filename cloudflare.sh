@@ -598,6 +598,18 @@ if [ ! -z "$profile" ]; then
   source "$CF_CONFIG/profiles/$profile"
 fi
 
+usage() {
+  cat <<EOF
+Usage: cloudflare.sh [options] [CMD] [CMD ARGS...]
+
+  available commands:
+    apikey  - Manage api keys
+    zone    - Manage zones
+    dns     - Manage DNS
+    profile - Manage profiles
+EOF
+}
+
 main() {
   case $1 in
     apikey)
@@ -617,7 +629,7 @@ main() {
       profile_main $@
       ;;
     *)
-      failure "Unkown command $1, available subcommands: apikey profile zone dns"
+      usage
     ;;
   esac
 }
