@@ -1,8 +1,6 @@
 # cloudflare-sh
 
-This script is designed to be use to manage DNS records of multiple accounts and multiple zones. It also prioritize scriptablility and portability.
-
-This script provides cli interface to manage DNS records on cloudflare via cloudflare api with minimum footprint and dependencies. The output of this script in intended to be simple to parse and easy to use with other tools like `awk`
+This script is designed to be use to manage DNS records of multiple accounts and multiple zones. It also prioritize scriptablility and portability, it provides cli interface to manage DNS records on cloudflare via cloudflare api with minimum footprint and dependencies. The output of this script in intended to be simple to parse and easy to use with other tools like `awk`
 
 PR Welcome! See code and bottom of this document for technical documentation.
 
