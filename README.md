@@ -26,12 +26,16 @@ Example workflow
 ```sh
 # register a new api key, since this is your first key, it will become the default now (you can change later)
 cloudflare.sh apikey new --keyname test --apikey <your-api-key>
+
 # list DNS records in zone "example.com"
 cloudflare.sh dns list --zone_name example.com
+
 # list A records in zone "example.com" 
 cloudflare.sh dns list --type A --zone_name example.com
+
 # Create an A record "test.example.com", points to 127.0.0.1
 cloudflare.sh dns --zone_name example.com create --type A --name test --content 127.0.0.1
+
 # Same as above, but different ordering, and set priority to 10
 cloudflare.sh dns create --zone_name example.com --type A --name test --content 127.0.0.1 --priority 10
 ```
@@ -112,7 +116,7 @@ To use a profile in place of api key and zone id, add `--profile your-profile-na
 
 In the case when multiple of these variables defined, the precedence are:
 
-`--apikey` (use a api key explicitly) > `--keyname (use a api key by name)` > `--profile (usa a profile)` > `(default zone_id)`
+`--apikey` (use a api key explicitly) > `--keyname (use a api key by name)` > `--profile (usa a profile)` > `(default apikey)`
 
 Similarly 
 `--zone_id` > `--zone_name` > `--profile (use a profile)` > `(default zone_id)`
