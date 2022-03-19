@@ -87,7 +87,7 @@ api() {
 # Check if the api request has succeed (cloudflare but a "success" key on the
 # top level of response)
 check_success() {
-  [[ "$(echo "$1" | jq .success)" == "true" ]]
+  [ "$(echo "$1" | jq .success)" == "true" ]
 }
 
 failure() {
@@ -587,7 +587,7 @@ fi
 if [ ! -e "$CF_CONFIG/default" ]; then
   touch "$CF_CONFIG/default"
 else
-  source "$CF_CONFIG/default"
+  . "$CF_CONFIG/default"
 fi
 
 # "eats" $@, strip off --* and reserialize them to $args
@@ -595,7 +595,9 @@ parse_env $@
 
 if [ ! -z "$profile" ]; then
   # Shadow the default profile if user defined a profile
-  source "$CF_CONFIG/profiles/$profile"
+  if [ -e "$CF_CONFIG/profiles/$profile" ]; then
+    . "$CF_CONFIG/profiles/$profile"
+  fi
 fi
 
 usage() {
