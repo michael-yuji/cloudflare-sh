@@ -36,11 +36,11 @@ Usage: apikey [CMD] [options...]
     list
       list all profiles
 
-    new•¶
+    new
       Reqister and set a name for an api key
         Required options:
-          --apikey [KEY]  - the api key to store
-          --name   [NAME] - the name of the api key to store as
+          --apikey  [KEY]  - the api key to store
+          --keyname [NAME] - the name of the api key to store as
 
     set-default [NAME]
       Set the api key with name [NAME] as the default api key, such that when
