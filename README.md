@@ -4,6 +4,8 @@ This script is designed to be use to manage DNS records of multiple accounts and
 
 This script provides cli interface to manage DNS records on cloudflare via cloudflare api with minimum footprint and dependencies. The output of this script in intended to be simple to parse and easy to use with other tools like `awk`
 
+PR Welcome! See code and bottom of this document for technical documentation.
+
 # Installation
 
 The only dependencies are `jq` and `curl`, you need to install `jq` and `curl` for your specific operating system.
@@ -148,5 +150,49 @@ The layout of the configuration directory is like this:
   | - keys/
   |.   - your_api_key_name
 ```
+
+# Technical Documentation
+
+## Calling Cloudflare api
+Use the api() function to call the cloudflare api, this will allows api keys
+to set automatically, and if there are any api failure it will set shell vars
+to aid debugging. The path must be the first argument of the api() function.
+
+Use check_success() function to check if a response succeed. The check_success
+function checks if the "success" field of the api returns true.
+
+# fatal failure handling
+Use the failure() function to fail the script with an error message, the 
+error message will be written to stderr.
+
+## The shell arguments
+
+The way this script works first parse the arguments pass to the script, any
+arguments starts with --, for example --foo will strip from the argument list, 
+and a shell variable, in this case $foo will be contructed, the value of $foo
+will be set to be the value of the next argument.
+
+For example if `--foo bar` are in the argument list, a shell variable foo=bar
+will be set.
+
+This allows a good (but can be danger...) degree of flexibility in writing the
+script. For example the script contains the logic that if $apikey is not set,
+apikey will be derive from other variables, now when the user set --apikey 
+directly it will alow us to bypass the deriving logic and save a lot of work.
+
+This is also the reason why must functions does not need to take $1 $2 as arguments.
+
+## Directory structure
+
+When the script launched and after after the script parsed arguments, it will
+source "$CF_CONFIG/default" and hence set the default variables, if the user
+set the $profile argument, the file in "$CF_CONFIG/profiles/$profile" will be
+sourced, and therefore any variables defined in both default and profile will
+be shadowed by the values defined in the profile file.
+
+
+
+
+
 
 

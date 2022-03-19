@@ -230,7 +230,7 @@ apikey_main() {
 
 ### Profile related ###
 profile_create() {
-  name="${1?:"Missing required argument \"NAME\""}"
+  name="${1?:"Missing required argument: create \"NAME\""}"
 
   if [ -e "$CF_CONFIG/profiles/$name" ]; then
     failure "The profile $name already exists!"
@@ -238,7 +238,6 @@ profile_create() {
 
   touch "$CF_CONFIG/profiles/$name"
   
-  stage_api_key
   stage_zone_id
 
   if [ ! -z "$keyname" ]; then 
@@ -262,7 +261,6 @@ Usage: profile [CMD] [options...]'
   create [NAME]
     Reqister and set a name for a profile
       Optional options:
-        --apikey  [KEY]     - the api key for this profile
         --keyname [NAME]    - the api key name for this profile
         --zone_name [NAME] - the name of the zone to be set for this profile
         --zone_id   [ID]   - the zone id to be set for this profile
@@ -358,17 +356,20 @@ profile_main() {
 ### Zone related ###
 
 stage_zone_id() {
-	if [ -z "$zone_id" ]; then
+  if [ -z "$zone_id" ]; then
     if [ -z "$zone_id" -a -z "$zone_name" -a -z "$default_zone_id" ]; then
       failure "[zone_id]: neither \$zone_id, \$zone_name, nor a default zone defined"
     else
       if [ ! -z "$zone_name" ]; then
         zone_id=$(zone_list | grep -F "$zone_name" | awk '{ print $1 }')
+        if [ -z "$zone_id" ]; then
+          failure "Cannot find such zone"
+        fi
       else
         zone_id="$default_zone_id"
       fi
     fi
-	fi
+  fi
 }
 
 zone_list() {
