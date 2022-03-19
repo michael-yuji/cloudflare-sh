@@ -33,16 +33,6 @@ set_keyval() {
 # default value
 set_default() {
   set_keyval "default" "$CF_CONFIG/default" $1 $2
-#  key=$1
-#  value=$2
-#
-#  echo "[default]: $key -> $value"
-#
-#  if [ ! -z "$(grep -F "$key=" "$CF_CONFIG/default")" ]; then
-#    sed -i .bak "s/^$key=.*$//g" "$CF_CONFIG/default"
-#  fi
-#
-#  echo -n "$key=$value" >> "$CF_CONFIG/default"
 }
 
 # Setup the $apikey variable by the following order:
