@@ -385,6 +385,23 @@ zone_set_default() {
   fi
 }
 
+zone_help() {
+  cat <<EOF
+Usage: zone [CMD] [options...]'
+
+  available commands:
+
+  list
+     list all zones 
+
+  set-default
+    Reqister and set as the default zone
+      Required options (either):
+        --zone_name [NAME] - the name of the zone to be set for this profile
+        --zone_id   [ID]   - the zone id to be set for this profile
+EOF
+}
+
 zone_main() {
   case $1 in
     list)
@@ -393,7 +410,11 @@ zone_main() {
     set-default)
       zone_set_default
     ;;
+    help)
+      zone_help
+			;;
     *)
+      zone_help
       failure "Unknown subcommand $1"
     ;;
   esac

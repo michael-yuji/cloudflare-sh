@@ -123,6 +123,21 @@ Similarly
 
 ### Zone management
 
+```
+Usage: zone [CMD] [options...]'
+
+  available commands:
+
+  list
+     list all zones
+
+  set-default
+    Reqister and set as the default zone
+      Required options (either):
+        --zone_name [NAME] - the name of the zone to be set for this profile
+        --zone_id   [ID]   - the zone id to be set for this profile
+```
+
 Current the script only supports querying zones (as that's all I need now).
 
 To query all zones under an account, if you have a default api key set, you can run
